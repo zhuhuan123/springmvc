@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.std.dao.UserMapper">
+	<select id="findByUser" resultType="com.std.model.User">
+		select id,username,birthday,sex,address from user
+	</select>
+	 <resultMap id="usermap" type="com.std.model.User">
+		<id property="id" column="id"></id>
+		<result property="username" column="username"></result>
+	</resultMap> 
+	<select id="finduser" resultMap="usermap">
+		select id, username from user; 
+	</select>
+	
+	<select id="findByLoginName" parameterType="java.lang.String" resultType="java.lang.String">
+		select password from user where loginName=#{loginName};
+	</select>
+	<select id="findUserVOByLoginName" parameterType="java.lang.String" resultType="com.std.VO.UserVO">
+		select id,loginName,password from user where loginName=#{loginName};
+	</select>
+	
+	<select id="findByUserId" resultType="com.std.model.User" parameterType="Integer">
+		select id,username,birthday,sex,address,dep_id from user where id=#{id}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.std.model.User">
+		insert into user(id,username,birthday,sex,address,loginName,password,dep_id) 
+		values(#{id},#{username},#{birthday},#{sex},#{address},#{loginName},#{password},#{dep_id});
+	</insert>
+	
+	<update id="updateuser" parameterType="com.std.model.User">
+		update user 
+		<set>
+			<if test="username!=null">
+				username = #{username},
+			</if>
+			<if test="birthday!=null">
+				   birthday = #{birthday},
+			</if>
+			<if test="sex!=null">
+				 sex = #{sex},
+			</if>
+			<if test="address!=null">
+				 address = #{address}
+			</if>
+		</set>
+		where id =#{id};
+	</update>
+	
+	<select id="selectByCondition" resultType="com.std.model.User" parameterType="com.std.model.User">
+		select id,username,birthday,sex,address from user 
+		<where>
+			<if test="id!='' and id!=null">
+			 id=#{id}
+			</if> 
+			 <if test="username!='' and username!=null">
+			 username=#{username}
+			</if>
+			<if test="birthday!='' and birthday!=null">
+				and birthday =#{birthday}
+			</if>
+			<if test="sex!='' and sex!=null">
+				and sex = #{sex}
+			</if>
+			<if test="address!='' and address!=null">
+				and address = #{address}
+			</if> 
+		</where>
+	</select>
+	<select id="selectByConditionPage" parameterType="java.util.HashMap" resultType="com.std.model.User">
+		select id,username,birthday,sex,address from user 
+		<where>
+			<if test="user.id!='' and user.id!=null">
+			 id=#{user.id}
+			</if> 
+			 <if test="user.username!='' and user.username!=null">
+			 username=#{user.username}
+			</if>
+			<if test="user.birthday!='' and user.birthday!=null">
+				and birthday =#{user.birthday}
+			</if>
+			<if test="user.sex!='' and user.sex!=null">
+				and sex = #{user.sex}
+			</if>
+			<if test="user.address!='' and user.address!=null">
+				and address = #{user.address}
+			</if> 
+		</where>
+		limit #{page},#{pagesize}
+	</select>
+	<select id="selectCountByConditionPage" parameterType="com.std.model.User" resultType="java.lang.Integer">
+		select count(*) from user 
+		<where>
+			<if test="id!='' and id!=null">
+			 id=#{id}
+			</if> 
+			 <if test="username!='' and username!=null">
+			 username=#{username}
+			</if>
+			<if test="birthday!='' and birthday!=null">
+				and birthday =#{birthday}
+			</if>
+			<if test="sex!='' and sex!=null">
+				and sex = #{sex}
+			</if>
+			<if test="address!='' and address!=null">
+				and address = #{address}
+			</if> 
+		</where>
+		
+	</select>
+	
+	<insert id="insertlist" parameterType="java.util.List">
+	insert into user(id,username,birthday,sex,address) 
+		values
+		<foreach item="item" collection="list" separator=",">
+		(#{item.id},#{item.username},#{item.birthday},#{item.sex},#{item.address});
+		</foreach>
+	</insert>
+	<delete id="deleteUser" parameterType="java.lang.Integer" >
+		delete from User where id =#{id};
+	</delete>
+	
+	<update id="deleteById" parameterType="java.lang.Integer">
+		update User set username='laozhang' where id =#{id};
+	</update>
+	
+	
+</mapper>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+    <title>test</title>  
+    <link href="js/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/lib/ligerUI/js/ligerui.all.js" type="text/javascript"></script>
+ <script src="js/lib/ligerUI/js/plugins/ligerComboBox.js"></script>
+    <script src="js/lib/ligerUI/js/plugins/ligerCheckBoxList.js"></script>
+    <script src="js/lib/ligerUI/js/plugins/ligerRadioList.js"></script>
+    <script src="js/lib/ligerUI/js/plugins/ligerListBox.js"></script> 
+    <script src="js/lib/ligerUI/js/plugins/ligerForm.js"></script> 
+<script src="js/lib/jquery.cookie.js"></script>
+<script src="js/lib/json2.js"></script>
+  
+    <script>  
+        var navtab;  
+        $(function ()  
+        {  
+            navtab = $("#navtab3").ligerTab({  
+                // showSwitchInTab:true,  
+                showSwitch: true  
+            });  
+  
+        });  
+        function test(){  
+            // ligerDialog.prompt('请输入网址', 'http://www.baidu.com', function (yes, value)  
+         //            {  
+         //                if (yes)   
+                            // navtab.addTabItem({ url: value });  
+                    // });  
+                    // break;  
+                    // navtab.addTabItem({ tabid:'123',text:'测试费',url: 'http://www.baidu.com' });  
+                    navtab.addTabItem({ tabid:'123',text:'测试费'});  
+                    // navtab.setHeader(123, "改变了文本");  
+  
+  
+        }  
+  
+    </script>  
+</head>  
+<body style="padding: 10px">  
+    <div id="navtab3" style="width: 600px;overflow:hidden; border:1px solid #A3C0E8; margin-top:6px;">  
+        <div tabid="home" title="主页" lselected="true"  style="height:300px" >  
+            <iframe frameborder="0" name="showmessage" src="index.html"></iframe>  
+        </div>  
+        <div  title="test1" showClose="true">  
+            <div id="Div1" style="margin:10px; height:300px;">test1</div>  
+        </div>  
+    </div>  
+    <input type="button" onclick="test()" value="添加一个tab" />  
+</body>  
+</html>  
